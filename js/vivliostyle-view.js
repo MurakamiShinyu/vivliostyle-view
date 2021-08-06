@@ -49,13 +49,13 @@ function makeVivliostyleView() {
     <iframe style="width:100vw;height:100vh;border:none" src="${vivliostyleViewerUrlWithParams}"></iframe>
     </body>`;
   
-    setTimeout(function () {
-      if (!document.querySelector("iframe")?.contentDocument) {
-        if (viewerMode === ViewerMode.VivliostyleNormalInIFrame) {
+    if (viewerMode === ViewerMode.VivliostyleNormalInIFrame && location.protocol === "file:") {
+      setTimeout(function () {
+        if (!document.querySelector("iframe")?.contentDocument) {
           location.replace(srcDocURL + "?viewer=" + ViewerMode.VivliostyleWithDataUrlInIFrame);
         }
-      }
-    }, 100);
+      }, 100);
+    }
   }
 }
 
